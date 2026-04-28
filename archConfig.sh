@@ -27,7 +27,8 @@ installVulkanIcdLoader=true # some games need this to run
 installLib32VulkanIcdLoader=true # some games need this to run
 installOBSstudio=true
 installTeamsForLinuxBin=true
-installDiscordptb=true
+installDiscordptb=false
+installDiscord=true
 installDolphin=true
 installJava=true
 installPython=true
@@ -50,6 +51,9 @@ installGradle=true
 installPyinstaller=true
 installZip=true
 installAudacity=true
+installMissionCenter=true
+
+groupInstallVirtualBox=false
 
 groupInstallNetworkAndStart=true
 
@@ -87,7 +91,7 @@ else
 	installMako=false
 fi
 
-groupInstallvirtVM=true
+groupInstallvirtVM=false
 
 if $groupInstallvirtVM; then
 	installVirtManager=true
@@ -165,7 +169,7 @@ manage_install_pkg_with_yay() {
 		yay -S "$pkg"
 	elif [[ "$flag1" == false ]] && is_installed "$pkg"; then
 		echo "uninstalling $pkg"
-		pacman -Rns "$pkg"
+		sudo pacman -Rns "$pkg"
 	fi
 }
 
@@ -194,14 +198,17 @@ manage_install_pkg $installGit git true
 manage_install_pkg $installSteam steam
 manage_install_pkg $installVulkanIcdLoader vulkan-icd-loader
 manage_install_pkg $installLib32VulkanIcdLoader lib32-vulkan-icd-loader
-manage_install_pkg $installQemu qemu
+manage_install_pkg $installVirtManager virt-manager true
+manage_install_pkg $groupInstallVirtualBox virtualbox
+#manage_install_pkg $installQemu qemu
+#manage_install_pkg $groupInstallvirtVM qemu-base
+#manage_install_pkg $installIproute2 iproute2
+manage_install_pkg $groupInstallvirtVM qemu-system-x86
 manage_install_pkg $installVde2 vde2
-manage_install_pkg $installIptables iptables
+#manage_install_pkg $installIptables iptables
 manage_install_pkg $installDnsmasq dnsmasq
-manage_install_pkg $installIproute2 iproute2
 manage_install_pkg $installOpenbsdNetcat openbsd-netcat
 manage_install_pkg $installSwtpm swtpm
-manage_install_pkg $installVirtManager virt-manager true
 manage_install_pkg $installWayland wayland
 manage_install_pkg $installNiri niri
 manage_install_pkg $installXorgXwayland xorg-xwayland
@@ -219,6 +226,12 @@ manage_install_pkg $installGradle gradle
 manage_install_pkg $installZip zip
 manage_install_pkg $installZip unzip
 manage_install_pkg $installAudacity audacity
+manage_install_pkg $installDiscord discord
+manage_install_pkg $installMissionCenter mission-center
+#manage_install_pkg $groupInstallVirtualBox virtualbox-host-modules-arch
+manage_install_pkg $groupInstallVirtualBox virtualbox-host-dkms
+manage_install_pkg $groupInstallVirtualBox linux-lts-headers
+manage_install_pkg $groupInstallVirtualBox virtualbox-guest-iso
 # with yay
 manage_install_pkg_with_yay $installTeamsForLinuxBin teams-for-linux-bin
 manage_install_pkg_with_yay $installDiscordptb discord-ptb
@@ -241,12 +254,12 @@ if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
 	echo "WARNING: multilib repo may not be enabled!"
 fi
 
-if $installVirtManager && ! systemctl is-active --quiet libvirtd; then
+#if $installVirtManager && ! systemctl is-active --quiet libvirtd; then
 	# Enable libvirt service
-	systemctl enable --now libvirtd.socket
-	systemctl enable --now libvirtd
+#	systemctl enable --now libvirtd.socket
+#	systemctl enable --now libvirtd
 	#sudo systemctl enable --now libvirtd.service virtlogd.service
-fi
+#fi
 
 echo "Type number to random event to get it to happen or enter nothing to make it random.    also if you put letters that will stop the random events from happening."
 read -r rA
