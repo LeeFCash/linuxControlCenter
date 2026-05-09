@@ -8,10 +8,6 @@
 
 set -e # stops the script when error
 
-R=$((RANDOM % 101))
-echo "${R}" > /tmp/random.txt
-R=$(cat /tmp/random.txt)
-
 update=true
 installFirefox=true
 installBrave=true
@@ -32,7 +28,7 @@ installDiscord=true
 installDolphin=true
 installJava=true
 installPython=true
-installBlueman=true
+installBluemanAndbluezObex=true
 installBlender=true
 installTmux=true
 installNeovim=true
@@ -52,6 +48,8 @@ installPyinstaller=true
 installZip=true
 installAudacity=true
 installMissionCenter=true
+installGimp=true
+installPlasma=true
 
 groupInstallVirtualBox=false
 
@@ -59,7 +57,7 @@ groupInstallNetworkAndStart=true
 
 if $groupInstallNetworkAndStart; then
 	installNetworkManager=true
-	installNetworkManagerApplet=true
+	installNetworkManagerApplet=false
 else
 	installNetworkManager=false
 	installNetworkManagerApplet=false
@@ -181,9 +179,10 @@ manage_install_pkg $installGameMode gamemode
 manage_install_pkg $installJava jdk21-openjdk
 manage_install_pkg $installPython python
 manage_install_pkg $installMangoHud mangohud
-manage_install_pkg $installBlueman blueman
-manage_install_pkg $installNetworkManagerApplet network-manager-applet
-manage_install_pkg $installNetworkManager networkmanager
+manage_install_pkg $installBluemanAndbluezObex blueman
+manage_install_pkg $installBluemanAndbluezObex bluez-obex
+#manage_install_pkg $installNetworkManager networkmanager
+#manage_install_pkg $installNetworkManagerApplet network-manager-applet
 manage_install_pkg $installBlender blender
 manage_install_pkg $installTmux tmux
 manage_install_pkg $installNeovim neovim
@@ -232,6 +231,8 @@ manage_install_pkg $installMissionCenter mission-center
 manage_install_pkg $groupInstallVirtualBox virtualbox-host-dkms
 manage_install_pkg $groupInstallVirtualBox linux-lts-headers
 manage_install_pkg $groupInstallVirtualBox virtualbox-guest-iso
+manage_install_pkg $installGimp gimp
+#manage_install_pkg $installPlasma plasma
 # with yay
 manage_install_pkg_with_yay $installTeamsForLinuxBin teams-for-linux-bin
 manage_install_pkg_with_yay $installDiscordptb discord-ptb
@@ -260,63 +261,4 @@ fi
 #	systemctl enable --now libvirtd
 	#sudo systemctl enable --now libvirtd.service virtlogd.service
 #fi
-
-echo "Type number to random event to get it to happen or enter nothing to make it random.    also if you put letters that will stop the random events from happening."
-read -r rA
-
-if [[ -n "$rA" ]]; then
-	R="$rA"
-fi
-
-if [[ "$R" == "1" ]]; then
-	fastfetch
-fi
-
-if [[ "$R" == "2" ]] && [[ "$update" == true ]]; then
-	echo "update the system."
-	echo "pacman first"
-	sudo pacman -Syu
-	echo "yay after."
-	yay -Syu
-fi
-
-if [[ "$R" == "3" ]] && [[ "$installNiri" == true ]]; then
-	echo "about to setup niri config."
-	sudo mkdir -p "$HOME/.config/niri"
-	sudo cp -rf "$HOME/archBashConfig/niri/config.kdl" "$HOME/.config/niri/"
-fi
-
-if [[ "$R" == "4" ]] && [[ "$installMako" == true ]]; then
-	echo "about to setup mako config."
-	sudo mkdir -p "$HOME/.config/mako"
-	sudo cp -rf "$HOME/archBashConfig/mako/config" "$HOME/.config/mako/"
-fi
-
-if [[ "$R" == "5" ]] && [[ "$installNeovim" == true ]]; then
-	echo "about to setup neovim config."
-	sudo mkdir -p "$HOME/.config/nvim"
-	sudo cp -rf "$HOME/archBashConfig/nvim/init.vim" "$HOME/.config/nvim/"
-fi
-
-if [[ "$R" == "6" ]]; then
-	echo "Sometimes the script will do something at this point but this time it's just letting you know."
-fi
-
-if [[ "$R" == "7" ]]; then
-	echo "about to show mem/swap info."
-	free -h
-fi
-
-if [[ "$R" == "8" ]]; then
-	echo "about to show the uptime info."
-	uptime
-fi
-
-if [[ "$R" == "9" ]] && [[ "$installWaybar" == true ]]; then
-	echo "about to setup waybar config."
-	sudo mkdir -p "$HOME/.config/waybar"
-	sudo cp -rf "$HOME/archBashConfig/waybar/style.css" "$HOME/.config/waybar/"
-fi
-
-echo "$R"
-echo "script is done"
+echo "to see if the script makes it here."
