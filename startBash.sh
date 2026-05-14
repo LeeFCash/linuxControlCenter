@@ -17,7 +17,7 @@ installNiri=true
 installMako=true
 installWaybar=true
 usingArch=true
-nameOfRootOfProjects="archBashConfig"
+nameOfRootOfProjects="linuxControlCenter"
 archConfigScriptPath="$HOME/$nameOfRootOfProjects/archConfig.sh"
 echo "Type number to random event to get it to happen or enter nothing to make it random.    also if you put letters that will stop the random events from happening."
 read -r rA

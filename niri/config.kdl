@@ -422,8 +422,7 @@ Mod+S allow-when-locked=true { spawn "sh" "-c" "
 	fi
 "; }
 Mod+Ctrl+S { spawn "sh" "-c" "
-	notify-send \"test\"
-	alacritty -e \"$HOME/archBashConfig/startBash.sh\"
+	alacritty -e \"$HOME/linuxControlCenter/startBash.sh\"
 "; }
     Mod+Shift+A                        { spawn "sh" "-c" "
 	items=(
