@@ -8,7 +8,7 @@
 
 set -e # stops the script when error
 
-update=false
+update=true
 
 # Function to check if a package is installed
 is_installed() {
@@ -21,11 +21,12 @@ manage_update() {
 	if [[ "$yesOrNo" == true ]]; then
 		echo "update the system."
 		echo "pacman first"
-		read -rt 20 waiting
+		sleep 20
 		sudo pacman -Syu
 		echo "yay after."
-		read -rt 20 waiting
+		sleep 20
 		yay -Syu
+		update=false
 	fi
 }
 
@@ -35,17 +36,17 @@ manage_install() {
 	local from="$3"
 	if [[ "$install" == true ]] && [[ "$from" == "pacman" ]] && ! is_installed "$name"; then
 		echo "installing $name after x amount of time. ctrl+c for the script to end now"
-		read -rt 20 waiting
+		sleep 20
 		sudo pacman -S "$name"
 	elif [[ "$install" == false ]] && [[ "$from" == "pacman" ]] && is_installed "$name"; then
 		echo "uninstalling $name after x amount of time. ctrl+c for the script to end now"
-		read -rt 20 waiting
+		sleep 20
 		sudo pacman -Rns "$name"
 	fi
 #
 	if [[ "$install" == true ]] && [[ "$from" == "yay" ]] && ! is_installed "$name"; then
 		echo "installing $name after x amount of time. ctrl+c for the script to end now"
-		read -rt 20 waiting
+		sleep 20
 		if ! command -v yay &> /dev/null; then
 			echo "installing yay the AUR helper"
 			cd /tmp/
@@ -58,7 +59,7 @@ manage_install() {
 		yay -S "$name"
 	elif [[ "$install" == false ]] && [[ "$from" == "yay" ]] && is_installed "$name"; then
 		echo "uninstalling $name after x amount of time. ctrl+c for the script to end now"
-		read -rt 20 waiting
+		sleep 20
 		sudo pacman -Rns "$name"
 	fi
 	manage_update $update
@@ -98,8 +99,8 @@ manage_install blender true pacman
 manage_install base-devel true pacman
 manage_install brave-bin true yay
 # N -
-manage_install networkmanager false pacman
-manage_install network-manager-applet false pacman
+manage_install networkmanager null pacman
+manage_install network-manager-applet null pacman
 manage_install neovim-jellybeans true yay
 manage_install neovim true pacman
 manage_install niri true pacman
@@ -108,6 +109,7 @@ manage_install tmux true pacman
 manage_install ttf-font-awesome true pacman
 manage_install ttf-jetbrains-mono-nerd true pacman
 manage_install teams-for-linux-bin true yay
+manage_install tree true pacman
 # F -
 manage_install fastfetch true pacman
 manage_install flatpak true pacman
@@ -136,8 +138,8 @@ manage_install qemu false pacman
 manage_install qemu-base false pacman
 manage_install qemu-system-x86 false pacman
 # I -
-manage_install iproute2 false pacman
-manage_install iptables false pacman
+manage_install iproute2 null pacman
+manage_install iptables null pacman
 # W -
 manage_install wayland true pacman
 manage_install waybar true pacman
