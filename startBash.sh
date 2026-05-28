@@ -130,7 +130,7 @@ if [[ "$R" == "12" ]]; then
 	choice="${items[$index]}"
 	echo " '$choice' is this what you want to open?(y/n)"
 	read -r pick
-	while [[ "$pick" == "n" ]]
+	while [[ "$pick" != "y" ]]
 	do
 		index=$((RANDOM % ${#items[@]}))
 		choice="${items[$index]}"
@@ -201,6 +201,19 @@ if [[ "$R" == "14" ]] && [[ "$installNeovim" == true ]]; then
 	sudo cp -rf "$HOME/$nameOfRootOfProjects/nvim/init.vim" "/root/.config/nvim/"
 else 
 	echo "14 did not go off( sets config for neovim root )."
+fi
+
+if [[ "$R" == "15" ]]; then
+	echo "type a commend to run or k to end 15.( if you have tmux or something like it you can do more )"
+	read -r c
+	while [[ "$c" != "k" ]]
+	do
+		$c
+		echo "type a commend to run or k to end 15."
+		read -r c
+	done
+else 
+	echo "15 did not go off( type/run commends )."
 fi
 
 echo "$R"

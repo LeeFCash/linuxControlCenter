@@ -76,8 +76,9 @@ input {
 // https://yalter.github.io/niri/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
 //
+//just in case /-output "eDP-1" {
 // niri msg outputs // command to get info
-/-output "eDP-1" {
+output "LG Electronics LG ULTRAGEAR 408NTFABJ195" {
     // Uncomment this line to disable this output.
     // off
 
@@ -87,10 +88,11 @@ input {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@120.030"
+//    mode "1920x1080@120.030"
+    mode "2560x1440@119.998"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 2// 2 was already there
+    scale 1// 2 was already there
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -105,11 +107,15 @@ input {
     // so to put another output directly adjacent to it on the right, set its x to 1920.
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
-    position x=1280 y=0
+    position x=0 y=0
 }
-/-output "PNP(ONN)" {
-	mode "1920x1080 @ 60.000 Hz"
+
+output "PNP(ONN) 100002487 0x01010101" {
+	mode "1920x1080@60.000"
+	transform "normal"
 	scale 1
+	// + and - matters 
+	position x=-1920 y=0
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -126,8 +132,8 @@ layout {
     // - "always", the focused column will always be centered.
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
-    //center-focused-column "on-overflow"
-    center-focused-column "never"
+    center-focused-column "on-overflow"
+    //center-focused-column "never"
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
@@ -288,6 +294,7 @@ spawn-at-startup "mako"
 spawn-at-startup "xwayland-satellite"// for xwayland only/apps
 spawn-at-startup "swaybg" "-i" "/home/leecash/Pictures/wallpaper/ken_kaneki.jpg"// if I ever want to have wallpaper
 spawn-at-startup "blueman-manager"// for xwayland only/apps
+spawn-at-startup "pavucontrol"// for sound control 
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -410,11 +417,11 @@ binds {
 Mod+Shift+S allow-when-locked=true { spawn "sh" "-c" "
 	amount=$(shuf -i 1-100 -n 1)
 	echo \"${amount}\" > /tmp/random.txt
-	notify-send \"volume add : ${amount} - also over 100 is = to 0% \"
+	notify-send \"volume make : ${amount}\"
 "; }
 Mod+S allow-when-locked=true { spawn "sh" "-c" "
 	amount=$(cat /tmp/random.txt)
-	wpctl set-volume @DEFAULT_AUDIO_SINK@ \"${amount}%+\"
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ \"${amount}%\"
 	CUR=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}')
 	CUR_PCT=$(awk \"BEGIN {print int($CUR * 100)}\")
 	if [[ \"$CUR_PCT\" -ge 100 ]]; then

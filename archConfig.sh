@@ -50,6 +50,8 @@ installAudacity=true
 installMissionCenter=true
 installGimp=true
 installPlasma=true
+installVideoDownloader=true
+installEasyEffects=true
 
 groupInstallVirtualBox=false
 
@@ -232,6 +234,7 @@ manage_install_pkg $groupInstallVirtualBox virtualbox-host-dkms
 manage_install_pkg $groupInstallVirtualBox linux-lts-headers
 manage_install_pkg $groupInstallVirtualBox virtualbox-guest-iso
 manage_install_pkg $installGimp gimp
+manage_install_pkg $installEasyEffects easyeffects
 #manage_install_pkg $installPlasma plasma
 # with yay
 manage_install_pkg_with_yay $installTeamsForLinuxBin teams-for-linux-bin
@@ -241,6 +244,7 @@ manage_install_pkg_with_yay $installBrave brave-bin
 manage_install_pkg_with_yay $installProtonGeCustomBin proton-ge-custom-bin
 manage_install_pkg_with_yay $installNeovimJellybeans neovim-jellybeans
 manage_install_pkg_with_yay $installPyinstaller pyinstaller
+manage_install_pkg_with_yay $installVideoDownloader video-downloader
 # -----
 if [ ! -d "/home/leecash/AppImages" ]; then
 	mkdir /home/leecash/AppImages
