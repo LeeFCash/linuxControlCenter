@@ -8,7 +8,7 @@
 
 set -e # stops the script when error
 
-update=true
+update=false
 
 # Function to check if a package is installed
 is_installed() {
@@ -117,7 +117,7 @@ manage_install firefox true pacman
 manage_install foot true pacman
 manage_install fuzzel true pacman
 # S -
-manage_install steam true pacman
+manage_install steam false pacman
 manage_install swtpm false pacman
 manage_install swaybg true pacman
 manage_install slurp true pacman

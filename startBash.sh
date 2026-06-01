@@ -103,7 +103,15 @@ fi
 if [[ "$R" == "11" ]]; then
 	echo "what volume % do you want?"
 	read -r amount
-	wpctl set-volume @DEFAULT_AUDIO_SINK@ "${amount}%"
+	count=0
+	while [[ "$yesIKnowIDontNeedThis" != "$amount" ]] && [[ "$amount" -le 100 ]]
+	do
+		((count+=1))
+		yesIKnowIDontNeedThis=$((RANDOM % 101))
+		echo "$yesIKnowIDontNeedThis - change $count "
+		wpctl set-volume @DEFAULT_AUDIO_SINK@ "${yesIKnowIDontNeedThis}%"
+		sleep 1s
+	done
 else
 	echo "11 did not go off( set the volume )."
 fi
@@ -218,4 +226,5 @@ fi
 
 echo "$R"
 echo "script is done"
-read -r waitHere
+#read -r waitHere
+sleep 1m
