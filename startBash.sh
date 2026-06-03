@@ -101,17 +101,36 @@ else
 fi
 
 if [[ "$R" == "11" ]]; then
+	allV=()
+	for ((i=0; i<=100; i++)); do
+		allV+=("$i")
+	done
+	index=$((RANDOM % ${#allV[@]}))
+	choice="${allV[$index]}"
+	echo "${allV[@]}"
 	echo "what volume % do you want?"
 	read -r amount
 	count=0
-	while [[ "$yesIKnowIDontNeedThis" != "$amount" ]] && [[ "$amount" -le 100 ]]
+	while [[ "$amount" -ne "$choice" ]] && [[ ${#allV[@]} -gt 0 ]]
 	do
-		((count+=1))
-		yesIKnowIDontNeedThis=$((RANDOM % 101))
-		echo "$yesIKnowIDontNeedThis - change $count "
-		wpctl set-volume @DEFAULT_AUDIO_SINK@ "${yesIKnowIDontNeedThis}%"
+		wpctl set-volume @DEFAULT_AUDIO_SINK@ "${choice}%"
 		sleep 1s
+		echo "$choice - change $count "
+		echo "${allV[@]}"
+		unset "allV[$index]"
+		allV=("${allV[@]}")
+		index=$((RANDOM % ${#allV[@]}))
+		choice="${allV[$index]}"
+		((count+=1))
 	done
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ "${choice}%"
+	echo "$choice - change $count "
+	echo "${allV[@]}"
+#	while [[ "$yesIKnowIDontNeedThis" != "$amount" ]] && [[ "$amount" -le 100 ]]
+#	do
+#		((count+=1))
+#		yesIKnowIDontNeedThis=$((RANDOM % 101))
+#	done
 else
 	echo "11 did not go off( set the volume )."
 fi
