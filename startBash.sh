@@ -8,7 +8,8 @@
 
 set -e # stops the script when error
 
-R=$((RANDOM % 101))
+#R=$((RANDOM % 101))
+R=0
 #echo "${R}" > /tmp/random.txt
 #R=$(cat /tmp/random.txt)
 update=true
@@ -19,7 +20,8 @@ installWaybar=true
 usingArch=true
 nameOfRootOfProjects="linuxControlCenter"
 archConfigScriptPath="$HOME/$nameOfRootOfProjects/archConfigV2.sh"
-echo "Type number to random event to get it to happen or enter nothing to make it random.    also if you put letters that will stop the random events from happening."
+#echo "Type number to random event to get it to happen or enter nothing to make it random.    also if you put letters that will stop the random events from happening."
+echo "type number to pick what happens or letter for nothing."
 read -r rA
 
 if [[ -n "$rA" ]]; then
@@ -102,7 +104,7 @@ fi
 
 if [[ "$R" == "11" ]]; then
 	allV=()
-	for ((i=0; i<=100; i++)); do
+	for ((i=0; i<=200; i++)); do
 		allV+=("$i")
 	done
 	index=$((RANDOM % ${#allV[@]}))
