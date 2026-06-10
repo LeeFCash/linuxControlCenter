@@ -10,6 +10,7 @@ set -e # stops the script when error
 
 #R=$((RANDOM % 101))
 R=0
+waitToEndscript=$((RANDOM % 61))
 #echo "${R}" > /tmp/random.txt
 #R=$(cat /tmp/random.txt)
 update=true
@@ -20,6 +21,8 @@ installWaybar=true
 usingArch=true
 nameOfRootOfProjects="linuxControlCenter"
 archConfigScriptPath="$HOME/$nameOfRootOfProjects/archConfigV2.sh"
+nixosPC2ConfigNane="configuration.nix"
+nixosPC2pathTo="$HOME/$nameOfRootOfProjects/nixos/pc1Config/"
 #echo "Type number to random event to get it to happen or enter nothing to make it random.    also if you put letters that will stop the random events from happening."
 echo "type number to pick what happens or letter for nothing."
 read -r rA
@@ -107,7 +110,8 @@ if [[ "$R" == "11" ]]; then
 	for ((i=0; i<=200; i++)); do
 		allV+=("$i")
 	done
-	index=$((RANDOM % ${#allV[@]}))
+#	index=$((RANDOM % ${#allV[@]}))
+	index=0
 	choice="${allV[$index]}"
 	echo "${allV[@]}"
 	echo "what volume % do you want?"
@@ -121,7 +125,7 @@ if [[ "$R" == "11" ]]; then
 		echo "${allV[@]}"
 		unset "allV[$index]"
 		allV=("${allV[@]}")
-		index=$((RANDOM % ${#allV[@]}))
+#		index=$((RANDOM % ${#allV[@]}))
 		choice="${allV[$index]}"
 		((count+=1))
 	done
@@ -245,7 +249,27 @@ else
 	echo "15 did not go off( type/run commends )."
 fi
 
+if [[ "$R" == "16" ]]; then
+	echo "after x amount of time the nixos system config will be replace by project pc1 config."
+	sleep 10
+	sudo cp -rf "$nixosPC2pathTo$nixosPC2ConfigNane" "/etc/nixos/configuration.nix"
+	echo "after x amount of time sudo nixos-rebuild switch will be ran."
+	sleep 10
+	sudo nixos-rebuild switch
+else 
+	echo "16 did not go off( the nixos system config will be replace by project pc1 config )"
+fi
+
+if [[ "$R" == "17" ]]; then
+	echo "after x amount of time the project pc1 config will open to edit."
+	sleep 3
+	sudo nvim $nixosPC2pathTo$nixosPC2ConfigNane
+else 
+	echo "17 did not go off( the project pc1 config will open to edit )"
+fi
+
 echo "$R"
 echo "script is done"
 #read -r waitHere
-sleep 1m
+sleep "$waitToEndscript"s
+echo "script is done2"
