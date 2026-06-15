@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      /home/leecash/linuxControlCenter/nixos/pc1Config/imports.nix# change to your user
     ];
 
   # Bootloader.
@@ -98,40 +99,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-	vim
-	vimPlugins.jellybeans-nvim
-	neovim
-	brave
-	blueman
-	pavucontrol
-	wget
-	git
   ];
-
-nix = {
-	settings = {
-		auto-optimise-store = true;
-		experimental-features = [ "nix-command" ];
-	};
-	gc = {
-		automatic = true;
-		dates = "hourly";
-		options = "--delete-older-than 7d";
-	};
-};
-
-system = {
-	autoUpgrade = {
-		enable = false;
-		allowReboot = false;
-		channel = "https://nixos.org/channels/nixos-unstable";
-	};
-};
-
-hardware.bluetooth = {
-  enable = true;
-  powerOnBoot = true; # Automatically starts the service on boot
-};   
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

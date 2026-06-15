@@ -10,7 +10,18 @@ set -e # stops the script when error
 
 #R=$((RANDOM % 101))
 R=0
-waitToEndscript=$((RANDOM % 61))
+#sleepTime=$(((RANDOM % 61) + 1))
+sleepTime=1
+#waitToEndscript=$((RANDOM % 61))
+waitToEndscript=0
+yesNo=1
+while [[ "$yesNo" -eq 1 ]]
+do
+	waitToEndscript=$((waitToEndscript + 1))
+	sleepTime=$((sleepTime + 1))
+	echo "$waitToEndscript loop of +1"
+	yesNo=$((RANDOM % 2))
+done
 #echo "${R}" > /tmp/random.txt
 #R=$(cat /tmp/random.txt)
 update=true
@@ -23,7 +34,25 @@ nameOfRootOfProjects="linuxControlCenter"
 archConfigScriptPath="$HOME/$nameOfRootOfProjects/archConfigV2.sh"
 nixosPC2ConfigNane="configuration.nix"
 nixosPC2pathTo="$HOME/$nameOfRootOfProjects/nixos/pc1Config/"
-#echo "Type number to random event to get it to happen or enter nothing to make it random.    also if you put letters that will stop the random events from happening."
+allCanDo=()
+allCanDo+=("\n1) info about setup")
+allCanDo+=("\n2) updates pacman and yay( if no yay might give error ) ")
+allCanDo+=("\n3) sets niri config")
+allCanDo+=("\n4) sets config for mako")
+allCanDo+=("\n5) sets config for neovim")
+allCanDo+=("\n6) just info about this script")
+allCanDo+=("\n7) info about memory(ram) and/or swap")
+allCanDo+=("\n8) uptime for system")
+allCanDo+=("\n9) add css to waybar / fonts( if already installed )")
+allCanDo+=("\n10) run arch config")
+allCanDo+=("\n11) set the volume")
+allCanDo+=("\n12) pick and run app/web/etc")
+allCanDo+=("\n13) turn off pc timer")
+allCanDo+=("\n14) sets config for neovim root")
+allCanDo+=("\n15) type/run commends")
+allCanDo+=("\n16) the nixos system config will be replace by project pc1 config")
+allCanDo+=("\n17) edit files")
+echo -e "${allCanDo[@]}"
 echo "type number to pick what happens or letter for nothing."
 read -r rA
 
@@ -110,8 +139,7 @@ if [[ "$R" == "11" ]]; then
 	for ((i=0; i<=200; i++)); do
 		allV+=("$i")
 	done
-#	index=$((RANDOM % ${#allV[@]}))
-	index=0
+	index=$((RANDOM % ${#allV[@]}))
 	choice="${allV[$index]}"
 	echo "${allV[@]}"
 	echo "what volume % do you want?"
@@ -120,12 +148,12 @@ if [[ "$R" == "11" ]]; then
 	while [[ "$amount" -ne "$choice" ]] && [[ ${#allV[@]} -gt 0 ]]
 	do
 		wpctl set-volume @DEFAULT_AUDIO_SINK@ "${choice}%"
-		sleep 1s
+		sleep 0.5s
 		echo "$choice - change $count "
 		echo "${allV[@]}"
 		unset "allV[$index]"
 		allV=("${allV[@]}")
-#		index=$((RANDOM % ${#allV[@]}))
+		index=$((RANDOM % ${#allV[@]}))
 		choice="${allV[$index]}"
 		((count+=1))
 	done
@@ -250,22 +278,41 @@ else
 fi
 
 if [[ "$R" == "16" ]]; then
+	echo -e "type number for action.\n    1) both replace PC1 nixos config and rebuild system\n    2) replace the nixos PC2 config. \n    3) run sudo nixos-rebuild switch"
+	read -r chh
+	if [[ "$chh" -eq 1 ]] || [[ "$chh" -eq 2 ]]; then
 	echo "after x amount of time the nixos system config will be replace by project pc1 config."
-	sleep 10
+	sleep "$sleepTime"s
 	sudo cp -rf "$nixosPC2pathTo$nixosPC2ConfigNane" "/etc/nixos/configuration.nix"
+	fi
+	if [[ "$chh" -eq 1 ]] || [[ "$chh" -eq 3 ]]; then
 	echo "after x amount of time sudo nixos-rebuild switch will be ran."
-	sleep 10
+	sleep "$sleepTime"s
 	sudo nixos-rebuild switch
+	fi
 else 
 	echo "16 did not go off( the nixos system config will be replace by project pc1 config )"
 fi
 
 if [[ "$R" == "17" ]]; then
-	echo "after x amount of time the project pc1 config will open to edit."
-	sleep 3
-	sudo nvim $nixosPC2pathTo$nixosPC2ConfigNane
+	echo -e "open what file(using neovim / nvim)?\n    1) archConfig\n    2) nixos config PC1"
+	read -r ch
+	if [[ "$ch" -eq 1 ]]; then
+		echo "after x amount of time the archConfig will open to edit."
+		sleep 3
+		nvim $archConfigScriptPath
+	else
+		echo "did not edit archConfig"
+	fi
+	if [[ "$ch" -eq 2 ]]; then
+		echo "after x amount of time the project pc1 config will open to edit."
+		sleep 3
+		sudo nvim $nixosPC2pathTo$nixosPC2ConfigNane
+	else
+		echo "did not edit nixos PC1 config"
+	fi
 else 
-	echo "17 did not go off( the project pc1 config will open to edit )"
+	echo "17 did not go off( edit files )"
 fi
 
 echo "$R"

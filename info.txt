@@ -1,1 +1,1 @@
-alacritty -e "./archBashConfig/startBash.sh" # can be used to make a keybeod shortcut 
+alacritty -e "./linuxControlCenter/startBash.sh" # can be used to make a keybeod shortcut 
