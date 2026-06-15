@@ -1,0 +1,29 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
+{ config, pkgs, ... }:
+
+{
+  environment.systemPackages = with pkgs; [
+	alacritty
+	audacity
+	vim
+	(neovim.override {
+		extraPkgs = pkgs: [
+			vimPlugins.jellybeans-nvim
+		];
+	})
+	(brave.override {
+		commandLineArgs = "--password-store=basic";
+	})
+	blueman
+	blender
+	pavucontrol
+	wget
+	git
+	fastfetch
+	obs-studio
+	discord
+  ];
+}

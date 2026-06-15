@@ -14,13 +14,13 @@ R=0
 sleepTime=1
 #waitToEndscript=$((RANDOM % 61))
 waitToEndscript=0
-yesNo=1
-while [[ "$yesNo" -eq 1 ]]
+yesNo=0
+while [[ "$yesNo" -ne 1 ]]
 do
 	waitToEndscript=$((waitToEndscript + 1))
 	sleepTime=$((sleepTime + 1))
 	echo "$waitToEndscript loop of +1"
-	yesNo=$((RANDOM % 2))
+	yesNo=$((RANDOM % 6))
 done
 #echo "${R}" > /tmp/random.txt
 #R=$(cat /tmp/random.txt)
@@ -52,6 +52,7 @@ allCanDo+=("\n14) sets config for neovim root")
 allCanDo+=("\n15) type/run commends")
 allCanDo+=("\n16) the nixos system config will be replace by project pc1 config")
 allCanDo+=("\n17) edit files")
+allCanDo+=("\n18) set brave up")
 echo -e "${allCanDo[@]}"
 echo "type number to pick what happens or letter for nothing."
 read -r rA
@@ -278,13 +279,13 @@ else
 fi
 
 if [[ "$R" == "16" ]]; then
-	echo -e "type number for action.\n    1) both replace PC1 nixos config and rebuild system\n    2) replace the nixos PC2 config. \n    3) run sudo nixos-rebuild switch"
+	echo -e "type number for action.\n    1) all everything\n    2) nothing. \n    3) run sudo nixos-rebuild switch"
 	read -r chh
-	if [[ "$chh" -eq 1 ]] || [[ "$chh" -eq 2 ]]; then
-	echo "after x amount of time the nixos system config will be replace by project pc1 config."
-	sleep "$sleepTime"s
-	sudo cp -rf "$nixosPC2pathTo$nixosPC2ConfigNane" "/etc/nixos/configuration.nix"
-	fi
+#	if [[ "$chh" -eq 1 ]] || [[ "$chh" -eq 2 ]]; then
+#	echo "after x amount of time the nixos system config will be replace by project pc1 config."
+#	sleep "$sleepTime"s
+#	sudo cp -rf "$nixosPC2pathTo$nixosPC2ConfigNane" "/etc/nixos/configuration.nix"
+#	fi
 	if [[ "$chh" -eq 1 ]] || [[ "$chh" -eq 3 ]]; then
 	echo "after x amount of time sudo nixos-rebuild switch will be ran."
 	sleep "$sleepTime"s
@@ -313,6 +314,13 @@ if [[ "$R" == "17" ]]; then
 	fi
 else 
 	echo "17 did not go off( edit files )"
+fi
+
+if [[ "$R" == "18" ]]; then
+	sudo mkdir -p "$HOME/.config/"
+	sudo cp -rf "$HOME/$nameOfRootOfProjects/brave/brave-flags.conf" "$HOME/.config/"
+else
+	echo "18 did not go off( set brave up )"
 fi
 
 echo "$R"
