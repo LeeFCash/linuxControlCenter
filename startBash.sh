@@ -20,7 +20,7 @@ do
 	waitToEndscript=$((waitToEndscript + 1))
 	sleepTime=$((sleepTime + 1))
 	echo "$waitToEndscript loop of +1"
-	yesNo=$((RANDOM % 6))
+	yesNo=$((RANDOM % 10))
 done
 #echo "${R}" > /tmp/random.txt
 #R=$(cat /tmp/random.txt)
@@ -175,7 +175,6 @@ if [[ "$R" == "12" ]]; then
 		"Gmail"
 		"outlookMail"
 		"webFluxer"
-		"AppImageFluxer"
 		"textnow"
 		"discord"
 		"youtubeSubscriptions"
@@ -188,16 +187,18 @@ if [[ "$R" == "12" ]]; then
 		"rumbleS"
 		"Nothing..."
 	)
-	index=$((RANDOM % ${#items[@]}))
-	choice="${items[$index]}"
-	echo " '$choice' is this what you want to open?(y/n)"
-	read -r pick
+#	index=$((RANDOM % ${#items[@]}))
+#	choice="${items[$index]}"
 	while [[ "$pick" != "y" ]]
 	do
 		index=$((RANDOM % ${#items[@]}))
 		choice="${items[$index]}"
 		echo " '$choice' is this what you want to open?(y/n)"
 		read -r pick
+		if [[ "$choice" != "Nothing..." ]]; then
+			unset "items[$index]"
+			items=("${items[@]}")
+		fi
 	done
 	case "$choice" in
 		"Gmail")
@@ -208,9 +209,6 @@ if [[ "$R" == "12" ]]; then
         	;;
 		"webFluxer")
 			xdg-open https://web.fluxer.app/channels/@me
-        	;;
-		"AppImageFluxer")
-			/home/leecash/AppImages/fluxer-stable-0.0.8-x86_64.AppImage
         	;;
 		"textnow")
 			xdg-open https://www.textnow.com/messaging
@@ -237,7 +235,7 @@ if [[ "$R" == "12" ]]; then
 			xdg-open https://www.messenger.com/new
         	;;
 		"brave")
-			brave
+			brave --password-store=basic
         	;;
 		"rumbleS")
 			xdg-open https://rumble.com/subscriptions
@@ -279,13 +277,13 @@ else
 fi
 
 if [[ "$R" == "16" ]]; then
-	echo -e "type number for action.\n    1) all everything\n    2) nothing. \n    3) run sudo nixos-rebuild switch"
+	echo -e "type number for action.\n    1) all everything\n    2) upgrade nixos \n    3) run sudo nixos-rebuild switch"
 	read -r chh
-#	if [[ "$chh" -eq 1 ]] || [[ "$chh" -eq 2 ]]; then
-#	echo "after x amount of time the nixos system config will be replace by project pc1 config."
-#	sleep "$sleepTime"s
-#	sudo cp -rf "$nixosPC2pathTo$nixosPC2ConfigNane" "/etc/nixos/configuration.nix"
-#	fi
+	if [[ "$chh" -eq 1 ]] || [[ "$chh" -eq 2 ]]; then
+	echo "after x amount of time the nixos system will upgrade."
+	sleep "$sleepTime"s
+	sudo nixos-rebuild switch --upgrade
+	fi
 	if [[ "$chh" -eq 1 ]] || [[ "$chh" -eq 3 ]]; then
 	echo "after x amount of time sudo nixos-rebuild switch will be ran."
 	sleep "$sleepTime"s

@@ -8,14 +8,29 @@
   environment.systemPackages = with pkgs; [
 	alacritty
 	audacity
-	vim
+	unzip
+	zip
+#	vim
+	tmux
+	video-downloader
+	nodejs
 	(neovim.override {
 		extraPkgs = pkgs: [
 			vimPlugins.jellybeans-nvim
+			vimPlugins.jellybeans-vim
 		];
 	})
 	(brave.override {
 		commandLineArgs = "--password-store=basic";
+	})
+	(lutris.override {
+		extraPkgs = pkgs: [
+#			# evaluation warning: 'wineWowPackages' is deprecated as it is no longer preferred by upstream. Use wineWow64Packages instead
+			pkgs.winetricks
+			pkgs.wineWow64Packages.stagingFull
+			pkgs.wineWow64Packages.waylandFull
+			pkgs.wineWow64Packages.yabridge
+		];
 	})
 	blueman
 	blender

@@ -9,5 +9,7 @@
     [ # Include the results of the hardware scan.
       ./pkg.nix
       ./system.nix
+      ./niri.nix
+      ./flatpak.nix
     ];
 }

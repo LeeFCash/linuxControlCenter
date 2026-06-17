@@ -11,5 +11,7 @@
       ./system.nix
       ./niri.nix
       ./steam.nix
+      ./flatpak.nix
+      ./wine.nix
     ];
 }
