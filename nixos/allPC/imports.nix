@@ -7,10 +7,8 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./pkg.nix
-      ./niri.nix
-      ./steam.nix
+      ./system.nix
+      ./flatpak.nix
 #      ./wine.nix
-	./../allPC/imports.nix
     ];
 }

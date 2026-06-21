@@ -10,8 +10,10 @@
 	audacity
 	unzip
 	zip
+#	netflix
 #	vim
 	tmux
+	teams-for-linux
 	video-downloader
 	nodejs
 	(neovim.override {
@@ -40,5 +42,6 @@
 	fastfetch
 	obs-studio
 	discord
+	spotify
   ];
 }
