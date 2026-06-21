@@ -39,9 +39,11 @@
 	pavucontrol
 	wget
 	git
+	godot
 	fastfetch
 	obs-studio
 	discord
 	spotify
+	krita
   ];
 }

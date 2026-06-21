@@ -33,8 +33,6 @@ environment.shellAliases = {
   rebuild = "sudo nixos-rebuild switch";
   lsA = "ls -a";
   lsAL = "ls -al";
-  v = "nvim";
-  rmR = "rm -r";
 };
 
 hardware.bluetooth = {

@@ -22,8 +22,8 @@ system = {
 		enable = true;
 		allowReboot = false;
 #		dates = "minutely";
-#		dates = "hourly";
-		operation = "boot";
+		dates = "hourly";
+#		operation = "boot";
 #		operation = "switch";
 		channel = "https://nixos.org/channels/nixos-unstable";
 	};
@@ -33,8 +33,6 @@ environment.shellAliases = {
   rebuild = "sudo nixos-rebuild switch";
   lsA = "ls -a";
   lsAL = "ls -al";
-  v = "nvim";
-  rmR = "rm -r";
 };
 
 hardware.bluetooth = {
