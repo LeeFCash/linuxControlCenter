@@ -31,14 +31,22 @@ system = {
 
 environment.shellAliases = {
   rebuild = "sudo nixos-rebuild switch";
-  lsA = "ls -a";
-  lsAL = "ls -al";
+  lsa = "ls -a";
+  lsal = "ls -al";
+  snv = "sudo nvim";
+  nv = "nvim";
+  srmr = "sudo rm -r";
+  rmr = "rm -r";
+  scpr = "sudo cp -r";
+  cpr = "cp -r";
+  syinfo = "cat /home/leecash/linuxControlCenter/nixos/allPC/system.nix";
 };
 
 hardware.bluetooth = {
   enable = true;
   powerOnBoot = true; # Automatically starts the service on boot
 };   
+
 boot.tmp.cleanOnBoot = true;
 fonts.packages = with pkgs; [
   nerd-fonts.fira-code

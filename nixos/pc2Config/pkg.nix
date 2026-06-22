@@ -16,6 +16,7 @@
 	teams-for-linux
 	video-downloader
 	nodejs
+	dmidecode
 	(neovim.override {
 		extraPkgs = pkgs: [
 			vimPlugins.jellybeans-nvim
