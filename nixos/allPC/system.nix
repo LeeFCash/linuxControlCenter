@@ -40,6 +40,12 @@ environment.shellAliases = {
   scpr = "sudo cp -r";
   cpr = "cp -r";
   syinfo = "cat /home/leecash/linuxControlCenter/nixos/allPC/system.nix";
+  shortcuts = "cat /home/leecash/linuxControlCenter/nixos/allPC/system.nix";
+  apr = "appimage-run";
+  nixos = "cd /home/leecash/linuxControlCenter/nixos";
+  pc1pkg = "snv /home/leecash/linuxControlCenter/nixos/pc1Config/pkg.nix";
+  pc2pkg = "snv /home/leecash/linuxControlCenter/nixos/pc2Config/pkg.nix";
+  lcc = "cd /home/leecash/linuxControlCenter";
 };
 
 hardware.bluetooth = {

@@ -5,15 +5,5 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./pkg.nix
-      ./niri.nix
-      ./steam.nix
-      ./hyprland.nix
-#      ./nvidiaD.nix
-#      ./appImages.nix
-#      ./wine.nix
-	./../allPC/imports.nix
-    ];
+#
 }

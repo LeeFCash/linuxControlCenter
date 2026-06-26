@@ -9,6 +9,8 @@
     [ # Include the results of the hardware scan.
       ./system.nix
       ./flatpak.nix
+      ./pkg.nix
+      ./nvim.nix
 #      ./wine.nix
     ];
 }

@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
 	alacritty
 	audacity
+#	appimage-run
 	unzip
 	zip
 #	netflix
@@ -17,18 +18,17 @@
 	video-downloader
 	nodejs
 	dmidecode
-	(neovim.override {
-		extraPkgs = pkgs: [
-			vimPlugins.jellybeans-nvim
-			vimPlugins.jellybeans-vim
-		];
-	})
+#	(neovim.override {
+#		extraPkgs = pkgs: [
+#			vimPlugins.jellybeans-nvim
+#			vimPlugins.jellybeans-vim
+#		];
+#	})
 	(brave.override {
 		commandLineArgs = "--password-store=basic";
 	})
 	(lutris.override {
 		extraPkgs = pkgs: [
-#			# evaluation warning: 'wineWowPackages' is deprecated as it is no longer preferred by upstream. Use wineWow64Packages instead
 			pkgs.winetricks
 			pkgs.wineWow64Packages.stagingFull
 			pkgs.wineWow64Packages.waylandFull
@@ -42,6 +42,7 @@
 	git
 	godot
 	fastfetch
+	ffmpeg-full
 	obs-studio
 	discord
 	spotify
