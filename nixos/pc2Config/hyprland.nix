@@ -8,10 +8,10 @@
 environment.systemPackages = with pkgs; [
 	kitty
 	hyprlauncher
-	adwaita-icon-theme
-	flameshot#screenshot
-	grim# for flameshot
+#	adwaita-icon-theme
+#	flameshot#screenshot
+#	grim# for flameshot
 ];
 programs.hyprland.enable = true;
-programs.hyprland.withUWSM = true;
+#programs.hyprland.withUWSM = true;
 }

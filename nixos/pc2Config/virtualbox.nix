@@ -5,13 +5,8 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./system.nix
-      ./flatpak.nix
-      ./pkg.nix
-      ./nvim.nix
-      ./docker.nix
-#      ./wine.nix
-    ];
+#
+virtualisation.virtualbox.host.enable = true;
+virtualisation.virtualbox.host.enableExtensionPack = true;
+users.extraGroups.vboxusers.members = [ "leecash" ];
 }

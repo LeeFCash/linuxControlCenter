@@ -6,6 +6,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-mission-center
+	mission-center
+	libnotify
   ];
 }

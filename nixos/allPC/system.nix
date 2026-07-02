@@ -19,7 +19,7 @@ nix = {
 
 system = {
 	autoUpgrade = {
-		enable = true;
+		enable = false;
 		allowReboot = false;
 #		dates = "minutely";
 		dates = "hourly";
@@ -31,6 +31,7 @@ system = {
 
 environment.shellAliases = {
   rebuild = "sudo nixos-rebuild switch";
+  upgrade = "sudo nixos-rebuild switch --upgrade";
   lsa = "ls -a";
   lsal = "ls -al";
   snv = "sudo nvim";
@@ -46,6 +47,9 @@ environment.shellAliases = {
   pc1pkg = "snv /home/leecash/linuxControlCenter/nixos/pc1Config/pkg.nix";
   pc2pkg = "snv /home/leecash/linuxControlCenter/nixos/pc2Config/pkg.nix";
   lcc = "cd /home/leecash/linuxControlCenter";
+  pc2 = "cd /home/leecash/linuxControlCenter/nixos/pc2Config";
+  pc1 = "cd /home/leecash/linuxControlCenter/nixos/pc1Config";
+  allpc = "cd /home/leecash/linuxControlCenter/nixos/allPC";
 };
 
 hardware.bluetooth = {

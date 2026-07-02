@@ -18,12 +18,6 @@
 	video-downloader
 	nodejs
 	dmidecode
-#	(neovim.override {
-#		extraPkgs = pkgs: [
-#			vimPlugins.jellybeans-nvim
-#			vimPlugins.jellybeans-vim
-#		];
-#	})
 	(brave.override {
 		commandLineArgs = "--password-store=basic";
 	})
@@ -37,6 +31,7 @@
 	})
 	blueman
 	blender
+	browsh
 	pavucontrol
 	wget
 	git
@@ -47,5 +42,6 @@
 	discord
 	spotify
 	krita
+	w3m
   ];
 }

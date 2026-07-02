@@ -5,13 +5,29 @@
 { config, pkgs, ... }:
 
 {
-	programs = {
-		steam = {
-			enable = true;
-			remotePlay.openFirewall = true;
-			dedicatedServer.openFirewall = true;
-			localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-			gamescopeSession.enable = true; # Enables integration with Gamescope, a compositing manager developed by Valve (used in Steam Deck’s gaming mode).Gamescope provides features like resolution scaling, frame rate limiting, and a streamlined gaming environment. Enabling this creates a session script that launches Steam with Gamescope, mimicking the Steam Deck’s “Gaming Mode” experience, useful for big-picture mode or gaming-focused setups.
-		};
-	};
+environment.systemPackages = with pkgs; [
+	gamemode
+	mangohud
+	gamescope
+	goverlay
+	vulkan-tools
+	vulkan-volk
+	vulkan-loader
+	vulkan-headers
+	protonup-qt
+	protonup-ng
+	protontricks
+	bottles
+	heroic
+#	wineWowPackages.stable# no longer used
+#	wineWow64Packages
+	winetricks
+];
+programs.steam.enable = true;
+programs.steam.remotePlay.openFirewall = true;
+programs.steam.dedicatedServer.openFirewall = true;
+programs.steam.localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+#programs.gamescope.enable = true;#test
+#programs.gamemode.enable = true;
+#hardware.steam-hardware.enable = true;
 }

@@ -20,13 +20,13 @@ count=0
 while [[ "$amount" -ne "$choice" ]] && [[ ${#allV[@]} -gt 0 ]]
 do
 	wpctl set-volume @DEFAULT_AUDIO_SINK@ "${choice}%"
-	sleep 0.5s
+	sleep 1s
 	echo "$choice - change $count "
 	echo "${allV[@]}"
 	unset "allV[$index]"
 	allV=("${allV[@]}")
 #	index=$((RANDOM % ${#allV[@]}))
-	((index+=1))
+#	((index+=1))
 	choice="${allV[$index]}"
 	((count+=1))
 done
