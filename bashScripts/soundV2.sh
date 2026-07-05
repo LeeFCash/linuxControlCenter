@@ -6,29 +6,16 @@
 # It is commonly used when we only care whether a command succeeds or fails
 # (its exit status), not what it prints to the terminal.
 set -e # stops the script when error
-allV=()
-for ((i=0; i<=1000; i++)); do
-	allV+=("$i")
-done
-index=$((RANDOM % ${#allV[@]}))
-#index=0
-choice="${allV[$index]}"
+R=$((RANDOM % 151))
 echo "${allV[@]}"
 echo "what volume % do you want?"
 read -r amount
-count=0
-while [[ "$amount" -ne "$choice" ]] && [[ ${#allV[@]} -gt 0 ]]
+while [[ "$amount" -ne "$R" ]]
 do
-	wpctl set-volume @DEFAULT_AUDIO_SINK@ "${choice}%"
-#	sleep 1s
-	echo "$choice - change $count "
-	echo "${allV[@]}"
-	unset "allV[$index]"
-	allV=("${allV[@]}")
-	index=$((RANDOM % ${#allV[@]}))
-	choice="${allV[$index]}"
-	((count+=1))
+	echo "$R - $amount"
+	R=$((RANDOM % 101))
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ "${amount}%"
 done
-wpctl set-volume @DEFAULT_AUDIO_SINK@ "${choice}%"
-echo "$choice - change $count "
+wpctl set-volume @DEFAULT_AUDIO_SINK@ "${amount}%"
+echo "$R - $amount"
 echo "${allV[@]}"

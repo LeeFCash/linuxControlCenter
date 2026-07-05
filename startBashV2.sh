@@ -27,6 +27,9 @@ if [[ -f /tmp/random.txt ]]; then
 		"soundC")
 			alacritty -e "./$root/bashScripts/sound.sh"
         	;;
+		"soundCV2")
+			alacritty -e "./$root/bashScripts/soundV2.sh"
+        	;;
 	esac
 	rm -r /tmp/random.txt
 	exit
@@ -37,12 +40,13 @@ fi
 		"oldStartBash"
 		"startStuff"
 		"soundC"
-		"Nothing..."
+		"soundCV2"
+		"how this works is run 1 time to select or run 2 times to pick it"
 	)
 index=$((RANDOM % ${#items[@]}))
 choice="${items[$index]}"
 echo "$choice" > /tmp/random.txt
 notify-send "🎲 Random pick: $choice"
-sleep 2s
+sleep 1s
 rm -r /tmp/random.txt
 notify-send "🎲 Random pick: null"
