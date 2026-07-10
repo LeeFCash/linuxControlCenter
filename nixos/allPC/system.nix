@@ -20,11 +20,11 @@ nix = {
 system = {
 	autoUpgrade = {
 		enable = false;
-		allowReboot = false;
-#		dates = "minutely";
-		dates = "hourly";
-#		operation = "boot";
-#		operation = "switch";
+#		allowReboot = false;
+##		dates = "minutely";
+#		dates = "hourly";
+##		operation = "boot";
+##		operation = "switch";
 		channel = "https://nixos.org/channels/nixos-unstable";
 	};
 };

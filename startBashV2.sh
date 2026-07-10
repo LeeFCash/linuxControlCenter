@@ -40,7 +40,7 @@ fi
 		"oldStartBash"
 		"startStuff"
 		"soundC"
-		"soundCV2"
+#		"soundCV2"
 		"how this works is run 1 time to select or run 2 times to pick it"
 	)
 index=$((RANDOM % ${#items[@]}))
@@ -49,4 +49,5 @@ echo "$choice" > /tmp/random.txt
 notify-send "🎲 Random pick: $choice"
 sleep 1s
 rm -r /tmp/random.txt
+$HOME/$root/bashScripts/tmp.sh
 notify-send "🎲 Random pick: null"

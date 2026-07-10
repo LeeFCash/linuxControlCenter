@@ -7,7 +7,7 @@
 # (its exit status), not what it prints to the terminal.
 set -e # stops the script when error
 allV=()
-for ((i=0; i<=1000; i++)); do
+for ((i=0; i<= 200; i++)); do
 	allV+=("$i")
 done
 index=$((RANDOM % ${#allV[@]}))
