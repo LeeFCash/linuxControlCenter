@@ -340,7 +340,7 @@ if [[ -f $HOME/tmp/random.txt ]]; then
 	exit
 fi
 notify-send "RANDOM R is $R for what list is picked."
-sleep 5s
+sleep 3s
 items=(
 	"setupAll"
 	"timerOffReboot"
@@ -361,7 +361,7 @@ while (( ${#items[@]} > 0 ));
 do
 	echo "$choice" > $HOME/tmp/random.txt
 	notify-send "🎲 Random pick: $choice"
-	sleep 5s
+	sleep 1s
 #	notify-send "🎲 Random pick: null"
 	unset "items[$index]"
 	items=("${items[@]}")
@@ -369,7 +369,7 @@ do
 		index=$((RANDOM % ${#items[@]}))
 		choice="${items[$index]}"
 	fi
-	ExitScript=$((RANDOM % 11))
+	ExitScript=$((RANDOM % 21))
 	if [[ "$ExitScript" -eq 5 ]]; then
 		notify-send "stopped script from running"
 		if [[ -f $HOME/tmp/random.txt ]]; then
