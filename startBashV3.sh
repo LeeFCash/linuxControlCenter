@@ -10,9 +10,9 @@ set -e # stops the script when error
 root="linuxControlCenter"
 $HOME/$root/bashScripts/tmp.sh
 R=$((RANDOM % 2))
-notify-send "RANDOM R is $R"
-if [[ -f /tmp/random.txt ]]; then
-	f=$(cat /tmp/random.txt)
+#ExitScript=$((RANDOM % 201))
+if [[ -f $HOME/tmp/random.txt ]]; then
+	f=$(cat $HOME/tmp/random.txt)
 	case $f in
 		"setupAll")
 			alacritty -e "./$root/bashScripts/setupAll.sh"
@@ -636,9 +636,11 @@ if [[ -f /tmp/random.txt ]]; then
 			wpctl set-volume @DEFAULT_AUDIO_SINK@ 200%
         	;;
 	esac
-	rm -r /tmp/random.txt
+	rm -r $HOME/tmp/random.txt
 	exit
 fi
+notify-send "RANDOM R is $R for what list is picked."
+sleep 5s
 items=(
 	"setupAll"
 	"timerOffReboot"
@@ -657,9 +659,9 @@ index=$((RANDOM % ${#items[@]}))
 choice="${items[$index]}"
 while (( ${#items[@]} > 0 ));
 do
-	echo "$choice" > /tmp/random.txt
+	echo "$choice" > $HOME/tmp/random.txt
 	notify-send "🎲 Random pick: $choice"
-	sleep 1s
+	sleep 5s
 #	notify-send "🎲 Random pick: null"
 	unset "items[$index]"
 	items=("${items[@]}")
@@ -667,5 +669,15 @@ do
 		index=$((RANDOM % ${#items[@]}))
 		choice="${items[$index]}"
 	fi
+	ExitScript=$((RANDOM % 11))
+	if [[ "$ExitScript" -eq 5 ]]; then
+		notify-send "stopped script from running"
+		if [[ -f $HOME/tmp/random.txt ]]; then
+			rm -r $HOME/tmp/random.txt
+		fi
+		exit
+	fi
 done
-rm -r /tmp/random.txt
+if [[ -f $HOME/tmp/random.txt ]]; then
+	rm -r $HOME/tmp/random.txt
+fi

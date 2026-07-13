@@ -55,12 +55,21 @@ if [[ "$yn" == "y" ]]; then
 	sudo mkdir -p "$HOME/.config/nvim"
 	sudo cp -rf "$HOME/$nameOfRootOfProjects/nvim/init.vim" "$HOME/.config/nvim/"
 fi
-if [ ! -d "/home/leecash/AppImages" ]; then
-	mkdir /home/leecash/AppImages
+#if [ ! -d "/home/leecash/AppImages" ]; then
+#	mkdir /home/leecash/AppImages
+#fi
+#if [ ! -d "/home/leecash/ISO" ]; then
+#	mkdir /home/leecash/ISO
+#fi
+#if [ ! -d "/home/leecash/tmp" ]; then
+#	mkdir /home/leecash/tmp
+#fi
+if [ ! -d "$HOME/AppImages" ]; then
+	mkdir $HOME/AppImages
 fi
-if [ ! -d "/home/leecash/ISO" ]; then
-	mkdir /home/leecash/ISO
+if [ ! -d "$HOME/ISO" ]; then
+	mkdir $HOME/ISO
 fi
-if [ ! -d "/home/leecash/tmp" ]; then
-	mkdir /home/leecash/tmp
+if [ ! -d "$HOME/tmp" ]; then
+	mkdir $HOME/tmp
 fi

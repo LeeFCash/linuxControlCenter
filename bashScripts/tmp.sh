@@ -7,8 +7,18 @@
 # (its exit status), not what it prints to the terminal.
 set -e # stops the script when error
 
-DIRECTORY="/home/leecash/tmp"
-DIRECTORY2="/home/leecash/.cache"
+DIRECTORY="$HOME/tmp"
+DIRECTORY2="$HOME/.cache"
+
+if [ ! -d "$HOME/AppImages" ]; then
+	mkdir $HOME/AppImages
+fi
+if [ ! -d "$HOME/ISO" ]; then
+	mkdir $HOME/ISO
+fi
+if [ ! -d "$HOME/tmp" ]; then
+	mkdir $HOME/tmp
+fi
 
 # Delete files older than 30 days
 find "$DIRECTORY" -type f -mtime +30 -delete
