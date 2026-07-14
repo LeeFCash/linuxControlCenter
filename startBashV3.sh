@@ -357,6 +357,8 @@ if [[ "$R" -eq 1 ]]; then
 fi
 index=$((RANDOM % ${#items[@]}))
 choice="${items[$index]}"
+ExitScript=$((RANDOM % (${#items[@]} + 1)))
+timeOutNumber=0
 while (( ${#items[@]} > 0 ));
 do
 	echo "$choice" > $HOME/tmp/random.txt
@@ -369,8 +371,8 @@ do
 		index=$((RANDOM % ${#items[@]}))
 		choice="${items[$index]}"
 	fi
-	ExitScript=$((RANDOM % 21))
-	if [[ "$ExitScript" -eq 5 ]]; then
+	((timeOutNumber+=1))
+	if [[ "$ExitScript" -eq "$timeOutNumber" ]]; then
 		notify-send "stopped script from running"
 		if [[ -f $HOME/tmp/random.txt ]]; then
 			rm -r $HOME/tmp/random.txt

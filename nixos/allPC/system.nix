@@ -13,7 +13,7 @@ nix = {
 	gc = {
 		automatic = true;
 		dates = "hourly";
-		options = "--delete-older-than 7d";
+		options = "--delete-older-than 30d";
 	};
 };
 
