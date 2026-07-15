@@ -9,6 +9,11 @@
 set -e # stops the script when error
 echo "time in minutes, seconds, hours? (m/s/h)"
 read -r timeT
-echo "how long until shutdown command starts?(number)"
+echo "how long until shutdown or reboot command starts?(number)"
 read -r timeL
+echo "do you want reboot?(y/n)"
+read -r rebootYN
+if [[ "$rebootYN" == "y" ]]; then
+	sleep "$timeL$timeT"; reboot
+fi
 sleep "$timeL$timeT"; shutdown

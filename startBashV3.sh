@@ -347,7 +347,7 @@ items=(
 	"oldStartBash"
 	"startStuff"
 	"soundC"
-#	"soundCV2"
+	"soundCV2"
 	"how this works is run 1 time to select or run 2 times to pick it"
 )
 if [[ "$R" -eq 1 ]]; then
@@ -363,7 +363,7 @@ while (( ${#items[@]} > 0 ));
 do
 	echo "$choice" > $HOME/tmp/random.txt
 	notify-send "🎲 Random pick: $choice"
-	sleep 1s
+	sleep 2s
 #	notify-send "🎲 Random pick: null"
 	unset "items[$index]"
 	items=("${items[@]}")

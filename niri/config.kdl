@@ -416,7 +416,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+Shift+D hotkey-overlay-title="Run startBashV2.sh" { spawn-sh "/home/leecash/linuxControlCenter/startBashV3.sh"; }
+    Mod+Shift+D hotkey-overlay-title="Run startBashV2.sh" { spawn-sh "$HOME/linuxControlCenter/startBashV3.sh"; }
     Mod+Space hotkey-overlay-title="Run an Application: Noctalia launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
@@ -442,20 +442,8 @@ binds {
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 // random stuff        |-----------------|
-Mod+Shift+S allow-when-locked=true { spawn "sh" "-c" "
-	amount=$(shuf -i 1-100 -n 1)
-	echo \"${amount}\" > /tmp/random.txt
-	notify-send \"volume make : ${amount}\"
-"; }
-Mod+S allow-when-locked=true { spawn "sh" "-c" "
-	amount=$(cat /tmp/random.txt)
-	wpctl set-volume @DEFAULT_AUDIO_SINK@ \"${amount}%\"
-	CUR=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}')
-	CUR_PCT=$(awk \"BEGIN {print int($CUR * 100)}\")
-	if [[ \"$CUR_PCT\" -ge 100 ]]; then
-		wpctl set-volume @DEFAULT_AUDIO_SINK@ \"0%\"
-	fi
-"; }
+Mod+Shift+S allow-when-locked=true { spawn-sh "$HOME/linuxControlCenter/startBashV4P1.sh"; }
+Mod+S allow-when-locked=true { spawn-sh "$HOME/linuxControlCenter/startBashV4P2.sh"; }
 Mod+Ctrl+S { spawn "sh" "-c" "
 	alacritty -e \"$HOME/linuxControlCenter/startBash.sh\"
 "; }
