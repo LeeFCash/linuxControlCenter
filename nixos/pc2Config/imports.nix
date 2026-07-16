@@ -10,6 +10,7 @@
       ./pkg.nix
       ./niri.nix
       ./steam.nix
+      ./shellStuff.nix
 #      ./virtualbox.nix
 #      ./hyprland.nix
 #      ./nvidiaD.nix

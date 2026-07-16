@@ -291,13 +291,17 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "xwayland-satellite"// for xwayland only/apps
-//spawn-at-startup "sh" "-c" "sleep 3 && noctalia-shell"
+//spawn-at-startup "sh" "-c" "sleep 3 && noctalia-shell"// other way to run but may have problem 
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
 spawn-at-startup "swaybg" "-i" "/home/leecash/Pictures/wallpaper/ken_kaneki.jpg"// if I ever want to have wallpaper
 //spawn-at-startup "blueman-manager"// for xwayland only/apps
 //spawn-at-startup "pavucontrol"// for sound control 
-spawn-at-startup "noctalia-shell"
+//spawn-at-startup "noctalia-shell"
+//spawn-sh-at-startup "alacritty -e noctalia-shell"
+//spawn-sh-at-startup "alacritty -e dms run"// what I like 
+spawn-sh-at-startup "$HOME/linuxControlCenter/bashScripts/startShell.sh"
+//spawn-sh-at-startup "dms run"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"

@@ -10,8 +10,8 @@
 	environment.systemPackages = with pkgs; [
 		niri
 		xwayland-satellite
-		noctalia-shell
-#		inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+#		noctalia-shell
+#		dms-shell
 		fuzzel
 		mako
 		foot
