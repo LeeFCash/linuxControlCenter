@@ -11,6 +11,7 @@
       ./niri.nix
       ./steam.nix
       ./shellStuff.nix
+#      ./sessionRandomV3.nix# trying to make random session but I seem to be doing something wrong I don't know
 #      ./virtualbox.nix
 #      ./hyprland.nix
 #      ./nvidiaD.nix

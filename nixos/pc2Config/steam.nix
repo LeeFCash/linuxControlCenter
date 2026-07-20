@@ -9,7 +9,7 @@ environment.systemPackages = with pkgs; [
 	gamemode
 	mangohud
 	gamescope
-	goverlay
+#	goverlay
 	vulkan-tools
 	vulkan-volk
 	vulkan-loader

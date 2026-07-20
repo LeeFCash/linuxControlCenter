@@ -39,6 +39,7 @@
 	fastfetch
 	ffmpeg-full
 	obs-studio
+#	ollama
 	discord
 	spotify
 	krita
