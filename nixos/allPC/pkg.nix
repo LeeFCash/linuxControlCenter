@@ -9,5 +9,6 @@
 	mission-center
 	libnotify
 	xdg-utils
+	tree
   ];
 }

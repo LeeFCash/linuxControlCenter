@@ -443,8 +443,10 @@ binds {
     // Using spawn-sh allows to pass multiple arguments together with the command.
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"; }
-    Mod+X allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"; }
-    Mod+Z allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"; }
+    Mod+Shift+X allow-when-locked=true { spawn-sh "$HOME/linuxControlCenter/bashScripts/soundUpR.sh"; }
+    Mod+Shift+Z allow-when-locked=true { spawn-sh "$HOME/linuxControlCenter/bashScripts/sound_pick.sh"; }
+    Mod+X allow-when-locked=true { spawn-sh "$HOME/linuxControlCenter/bashScripts/soundUp1.sh"; }
+    Mod+Z allow-when-locked=true { spawn-sh "$HOME/linuxControlCenter/bashScripts/sound_set.sh"; }
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 // random stuff        |-----------------|
@@ -479,39 +481,7 @@ Mod+Ctrl+S { spawn "sh" "-c" "
 
 	echo \"$choice\" > /tmp/random.txt
 "; }
-    Mod+A                        { spawn "sh" "-c" "
-	if grep -qx \"Gmail\" /tmp/random.txt; then
-		xdg-open https://mail.google.com/mail/u/0/#inbox
-	elif grep -qx \"outlookMail\" /tmp/random.txt; then
-		xdg-open https://outlook.cloud.microsoft/mail/
-	elif grep -qx \"webFluxer\" /tmp/random.txt; then
-		xdg-open https://web.fluxer.app/channels/@me
-	elif grep -qx \"AppImageFluxer\" /tmp/random.txt; then
-		/home/leecash/AppImages/fluxer-stable-0.0.8-x86_64.AppImage
-	elif grep -qx \"textnow\" /tmp/random.txt; then
-		xdg-open https://www.textnow.com/messaging
-	elif grep -qx \"discordptb\" /tmp/random.txt; then
-		discord-ptb
-	elif grep -qx \"youtubeSubscriptions\" /tmp/random.txt; then
-		xdg-open https://www.youtube.com/feed/subscriptions
-	elif grep -qx \"steam\" /tmp/random.txt; then
-		steam
-	elif grep -qx \"chattanoogastateWebsite\" /tmp/random.txt; then
-		xdg-open https://www.chattanoogastate.edu/
-	elif grep -qx \"blueSky\" /tmp/random.txt; then
-		xdg-open https://bsky.app/profile/lonelyleecash.bsky.social
-	elif grep -qx \"flathub\" /tmp/random.txt; then
-		xdg-open https://flathub.org/en
-	elif grep -qx \"messenger\" /tmp/random.txt; then
-		xdg-open https://www.messenger.com/new
-	elif grep -qx \"brave\" /tmp/random.txt; then
-		brave
-	elif grep -qx \"rumbleS\" /tmp/random.txt; then
-		xdg-open https://rumble.com/subscriptions
-	else
-		notify-send \"Did not find a match\"
-	fi
-    "; }
+    Mod+A { spawn-sh "$HOME/linuxControlCenter/startBash/timer_count_press.sh"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
