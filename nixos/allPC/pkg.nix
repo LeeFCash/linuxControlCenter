@@ -8,7 +8,9 @@
   environment.systemPackages = with pkgs; [
 	mission-center
 	libnotify
-	xdg-utils
+	xdg-utils#xdg-open
+#	wlrctl#input output
+#	wtype#input output
 	tree
   ];
 }

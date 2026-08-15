@@ -60,6 +60,9 @@ input {
         // scroll-button-lock
         // middle-emulation
     }
+    tablet {
+	    //block-wacom-attributes true
+    }
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     warp-mouse-to-focus
@@ -294,13 +297,14 @@ spawn-at-startup "xwayland-satellite"// for xwayland only/apps
 //spawn-at-startup "sh" "-c" "sleep 3 && noctalia-shell"// other way to run but may have problem 
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
-spawn-at-startup "swaybg" "-i" "/home/leecash/Pictures/wallpaper/ken_kaneki.jpg"// if I ever want to have wallpaper
+//spawn-at-startup "swaybg" "-i" "/home/leecash/Pictures/wallpaper/ken_kaneki.jpg"// if I ever want to have wallpaper
+//spawn-at-startup "otd-gui"
 //spawn-at-startup "blueman-manager"// for xwayland only/apps
 //spawn-at-startup "pavucontrol"// for sound control 
 //spawn-at-startup "noctalia-shell"
 //spawn-sh-at-startup "alacritty -e noctalia-shell"
 //spawn-sh-at-startup "alacritty -e dms run"// what I like 
-spawn-sh-at-startup "$HOME/linuxControlCenter/bashScripts/startShell.sh"
+spawn-sh-at-startup "$HOME/linuxControlCenter/bashScripts/onStart.sh"
 //spawn-sh-at-startup "dms run"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -696,19 +700,7 @@ Mod+Shift+P { spawn "sh" "-c" "
 	echo \"${R}\" > /tmp/random.txt
 "; }
 /*niri validate     commend to help find problem */
-Mod+P { spawn "sh" "-c" "
-	if [ ! -f /tmp/random.txt ]; then
-		notify-send \"No timer selected\"
-		exit
-	fi
-
-	R=$(cat /tmp/random.txt)
-
-	notify-send \"${R} is around how many minutes\nyou have until power off.\"
-
-	sleep ${R}m
-	shutdown
-"; }
+Mod+P { spawn "sh" "-c" "shutdown"; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".

@@ -1,4 +1,8 @@
+#!/usr/bin/env bash
+set -e # stops the script when error
+$HOME/linuxControlCenter/bashScripts/tmp.sh
 R=$((RANDOM % 4))
+#shell start 
 if [[ "$R" -eq 0 ]]; then
 	notify-send "starting dms also known as Dank Material Shell"
 	alacritty -e bash -c 'dms run; echo; echo "Exit code: $?"; sleep 2h'
@@ -16,8 +20,13 @@ if [[ "$R" -eq 2 ]]; then
 		wallpaperDir="$HOME/linuxControlCenter/Wallpapers"
 		wallpapers=("$wallpaperDir"/*)
 		image="${wallpapers[RANDOM % ${#wallpapers[@]}]}"
-		pkill swaybg 2>>"$HOME/tmp/swaybgError.txt"
-		swaybg -i "$image" -m fit &
+		nohup swaybg -i "$image" -m fit &
 		sleep 1m
+		pkill swaybg 2>>"$HOME/tmp/swaybgError.txt"
 	done
 fi
+#auto open - 
+#sleep 1m
+#blueman-manager
+#pavucontrol
+#otd-gui

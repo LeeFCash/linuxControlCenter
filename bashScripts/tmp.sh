@@ -9,6 +9,7 @@ set -e # stops the script when error
 
 DIRECTORY="$HOME/tmp"
 DIRECTORY2="$HOME/.cache"
+DIRECTORY3="$HOME/tmp/tmp2"
 
 if [ ! -d "$HOME/AppImages" ]; then
 	mkdir $HOME/AppImages
@@ -19,6 +20,9 @@ fi
 if [ ! -d "$HOME/tmp" ]; then
 	mkdir $HOME/tmp
 fi
+if [ ! -d "$HOME/tmp/tmp2" ]; then
+	mkdir $HOME/tmp/tmp2
+fi
 
 # Delete files older than 30 days
 find "$DIRECTORY" -type f -mtime +30 -delete
@@ -28,6 +32,10 @@ find "$DIRECTORY" -type d -empty -mtime +30 -delete
 find "$DIRECTORY2" -type f -mtime +30 -delete
 # Delete empty directories older than 30 days
 find "$DIRECTORY2" -type d -empty -mtime +30 -delete
+# Delete files older than 1 days
+find "$DIRECTORY3" -type f -mtime +0 -delete
+# Delete empty directories older than 1 days
+find "$DIRECTORY3" -type d -empty -mtime +0 -delete
 
 # Delete files older than 1 minute
 #find "$DIRECTORY" -type f -mmin +1 -delete

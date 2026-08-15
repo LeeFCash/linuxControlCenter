@@ -21,7 +21,6 @@ environment.systemPackages = with pkgs; [
 	heroic
 #	wineWowPackages.stable# no longer used
 #	wineWow64Packages
-	winetricks
 ];
 programs.steam.enable = true;
 programs.steam.remotePlay.openFirewall = true;
