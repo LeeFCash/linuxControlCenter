@@ -20,7 +20,8 @@ if [[ "$R" -eq 2 ]]; then
 		wallpaperDir="$HOME/linuxControlCenter/Wallpapers"
 		wallpapers=("$wallpaperDir"/*)
 		image="${wallpapers[RANDOM % ${#wallpapers[@]}]}"
-		nohup swaybg -i "$image" -m fit &
+#		nohup swaybg -i "$image" -m fit &
+		swaybg -i "$image" -m fit &
 		sleep 1m
 		pkill swaybg 2>>"$HOME/tmp/swaybgError.txt"
 	done

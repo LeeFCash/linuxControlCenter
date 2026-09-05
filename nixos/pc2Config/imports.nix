@@ -14,11 +14,12 @@
       ./tablet.nix
 #      ./sessionRandomV3.nix# trying to make random session but I seem to be doing something wrong I don't know
 #      ./virtualbox.nix
-#      ./hyprland.nix
+      ./hyprland.nix
 #      ./nvidiaD.nix
 #      ./appImages.nix
 #      ./wine.nix
 	./../allPC/imports.nix
 	./test.nix
+	./custom_session1.nix
     ];
 }

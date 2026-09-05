@@ -16,6 +16,7 @@
 	tmux
 	teams-for-linux
 	video-downloader
+	vlc
 	nodejs
 	dmidecode
 	(brave.override {

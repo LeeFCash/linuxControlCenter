@@ -12,5 +12,6 @@
 #	wlrctl#input output
 #	wtype#input output
 	tree
+	pavucontrol
   ];
 }

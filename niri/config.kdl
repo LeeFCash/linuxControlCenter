@@ -402,6 +402,8 @@ window-rule {
 }
 window-rule {
     open-maximized false
+    default-column-width { proportion 0.90; }
+    default-window-height { proportion 1.00; }
     //open-floating true
     open-focused true
     //open-focused false
